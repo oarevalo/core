@@ -1,6 +1,6 @@
 <cfcomponent>
 	<!---
-		'Core' framework (v 1.4.1) 
+		'Core' framework (v 1.4.2) 
 		by Oscar Arevalo (oarevalo@gmail.com - http://www.oscararevalo.com)
 
 		Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,6 +46,7 @@
 	<cfset this.app_key = "_core">
 	<cfset this.APP_KEYS.SERVICES = "services">
 	<cfset this.APP_KEYS.SETTINGS = "settings">
+	<cfset this.APP_KEYS.PATHS = "paths">
 	<!---------------------------------------->
 
 	<cffunction name="onRequestStart" access="public" hint="This contains the actual front controller logic">
@@ -159,6 +160,9 @@
 					// load application services
 					loadApplicationServices(xmlDoc);
 				}
+
+				// store resolved paths in app scope
+				application[this.app_key][this.APP_KEYS.PATHS] = this.paths;
 	
 				// execute application-specific initialization tasks
 				if(isObject(arguments.appHandler) and structKeyExists(arguments.appHandler,"onApplicationStart")) 
@@ -222,6 +226,7 @@
 				for(i=1;i lte arrayLen(arguments.xmlConfig.xmlRoot.settings.xmlChildren);i=i+1) {
 					xmlNode = arguments.xmlConfig.xmlRoot.settings.xmlChildren[i];
 					if(xmlNode.xmlName eq "setting") {
+						if(xmlNode.xmlAttributes.value eq "$APP_PATH") xmlNode.xmlAttributes.value = this.paths.app;
 						application[this.app_key][this.APP_KEYS.SETTINGS][xmlNode.xmlAttributes.name] = xmlNode.xmlAttributes.value;
 					}
 				}
@@ -261,7 +266,8 @@
 
 								} else {
 									// append to argument collection
-									stArguments[ xmlNode.xmlChildren[j].xmlAttributes.name ] = xmlNode.xmlChildren[j].xmlText;
+									if(trim(xmlNode.xmlChildren[j].xmlText) eq "$APP_PATH") xmlNode.xmlChildren[j].xmlText = this.paths.app;
+									stArguments[ xmlNode.xmlChildren[j].xmlAttributes.name ] = trim(xmlNode.xmlChildren[j].xmlText);
 								}
 							}
 						}

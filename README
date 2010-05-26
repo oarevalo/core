@@ -1,4 +1,4 @@
-'Core' framework (v 1.4.1) 
+'Core' framework (v 1.4.2) 
 
 by Oscar Arevalo (oarevalo@gmail.com - http://www.oscararevalo.com)
 
@@ -96,6 +96,11 @@ getSetting() : retrieves the value of an application setting (NOT a framework se
 getService() : retrieves the instance of an application service declared on the
 				settings xml document.
 
+getPath() : returns the resolved path for any framework element. Paths are returned as
+				relative urls from the webroot. Any of the elements set on the this.paths.*
+				variables can be used as the argument
+				i.e: getPath("app") returns the path where the application is located.
+
 setMessage() : Sets a system Message to be displayed on the view or layout. 
 				These messages are persistent across page redirects, but may only 
 				be displayed once. 
@@ -120,6 +125,9 @@ this.mainHandler:
 this.defaultEvent:
 	This is the name of the event that will be called when no event is explicitly
 	indicated
+
+this.defaultLayout:
+	This is the name of the layout template that will be used by default
 
 this.errorHandler:
 	An event to call whenever an error occurs.
@@ -160,7 +168,7 @@ this.paths.error:
 	Path to a template to show whenever an error occurs. 
 	Defaults to /path_to_core/includes/error.cfm
 
-this.paths.handler:
+this.paths.handlers:
 	Use this to indicate an explicit path for where to locate the event handlers. 
 	By default assumes that its on a subdirectory indicated by the 
 	setting this.dirs.handlers 

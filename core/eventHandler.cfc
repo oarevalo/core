@@ -11,6 +11,7 @@
 		variables.APP_KEYS.CORE = "_core";
 		variables.APP_KEYS.SERVICES = "services";
 		variables.APP_KEYS.SETTINGS = "settings";
+		variables.APP_KEYS.PATHS = "paths";
 		
 		// setters and getters
 		function getView() {return variables.requestState.view;}
@@ -97,7 +98,25 @@
 		</cfif>
 		
 	</cffunction>		
-			
+
+
+	<!--- application paths --->	
+	<cffunction name="getPath" access="public" returntype="string">
+		<cfargument name="pathName" type="string" required="true">
+
+		<cfif structKeyExists(application,variables.APP_KEYS.CORE)
+				and structKeyExists(application[variables.APP_KEYS.CORE],variables.APP_KEYS.PATHS)>
+			<cfif structKeyExists(application[variables.APP_KEYS.CORE][variables.APP_KEYS.PATHS],arguments.pathName)>
+				<cfreturn application[variables.APP_KEYS.CORE][variables.APP_KEYS.PATHS][arguments.pathName]>
+			<cfelse>
+				<cfthrow message="The requested application path [#arguments.pathName#] doesn't exist">
+			</cfif>
+		<cfelse>
+			<cfthrow message="Application paths have not been initialized">
+		</cfif>
+		
+	</cffunction>		
+							
 			
 	<!--- cross-requests messages --->		
 	<cffunction name="setMessage" access="public" returntype="void">

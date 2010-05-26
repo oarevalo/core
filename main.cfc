@@ -1,12 +1,13 @@
 <cfcomponent extends="core.eventHandler">
 	
 	<cffunction name="onRequestStart">
-		<cfset setMessage("info","Hey there!")>
+		<cfset setMessage("info","Hey there!") />
 	</cffunction>	
 	
 	<cffunction name="sayHello">
-		<cfset setValue("hostname",CGI.server_name)>
-		<cfset setView("hello")>
+		<cfset setValue("appPath",getPath("app")) />
+		<cfset setValue("hostname",CGI.server_name) />
+		<cfset setView("hello") />
 	</cffunction>
 	
 </cfcomponent>
