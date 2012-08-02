@@ -2,7 +2,7 @@
 ===============
 https://github.com/oarevalo/core
 
-**Core** is a very lightweight and general purpose MVC framework for developing web applications in ColdFusion. Core is based on the MVC and Front Controller patterns and its goal is to be minimally intrusive and leverage pre-existing 
+**Core** is a very lightweight and general purpose MVC framework for developing web applications in ColdFusion. Core is based on the MVC and Front Controller patterns and its goal is to be minimally intrusive and leverage existing 
 CFML constructs instead of providing too many features.
 
 
@@ -32,7 +32,7 @@ Contents:
 
 What is It?
 -----------
-'Core' is a very lightweight and general purpose MVC framework for developing web applications in ColdFusion. Core is based on the MVC and Front Controller patterns and its goal is to be minimally intrusive and leverage pre-existing 
+'Core' is a very lightweight and general purpose MVC framework for developing web applications in ColdFusion. Core is based on the MVC and Front Controller patterns and its goal is to be minimally intrusive and leverage existing 
 CFML constructs instead of providing too many features.
 
 
@@ -41,9 +41,9 @@ How Do I Use It?
 ----------------
 You can use Core either from a central location or by including the 'core' directory within your application.
 
-* The easiest ways to use it is by having your main Application.cfc extend core.coreApp.cfc; However you can also use coreApp by creating an instance of it, setting the appropriate settings and calling the onRequestStart() method for every request.
+* The easiest ways to use it is by having your main `Application.cfc` extend `core.coreApp.cfc`; However you can also use coreApp by creating an instance of it, setting the appropriate settings and calling the `onRequestStart()` method on every request.
 
-* Configure your app programmatically using the available config options (see next section)
+* Configure your application programmatically using the available config options (see next section)
 
 * Create an index.cfm file with the following content:
 
@@ -102,11 +102,9 @@ All settings are done programatically by overriding variables defined in coreApp
 
 `this.mainHandler:`
 	This is the name of the component used as the main event handler, core will call the methods `onApplicationStart()`, `onRequestStart()` and `onRequestEnd()` on the main handler if any of them exists. 
-	Also, if the requested event is not qualified by an event handler CFC or by a module, it will call the event on the main handler. For example: 
+	Also, if the requested event is not qualified by an event handler CFC or by a module, it will call the event on the main handler. For example, typing the following URL on the browser will call the event "hello" on the main handler.: 
 
-    index.cfm?event=hello 
-
-	will call the event "hello" on the main handler.
+    http://your_server_name/index.cfm?event=hello 	
 
 `this.defaultEvent:`
 	This is the name of the event that will be called when no event is explicitly 	indicated
@@ -164,7 +162,7 @@ All settings are done programatically by overriding variables defined in coreApp
 
 How Do I Add Settings & Services?
 ----------------------------------
-** This is a completely optional feature **
+**This is a completely optional feature**
 
 'Core' allows you to declare a set of global values and services that are available to the entire application. 
 
