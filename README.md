@@ -46,9 +46,9 @@ You can use Core either from a central location or by including the 'core' direc
 * Configure your application programmatically using the available config options (see next section)
 
 * Create an index.cfm file with the following content:
-
+```
     <cfinclude template="core/core.cfm">
-	
+```	
 * Define your application actions on CFCs (these are called event handlers). For convenience your event handler CFCs should extend core.eventHandler, but that is not a requirement.	
 	
 All the rest is up to you, but usually you will want to have some views and event handlers for your app to do anything useful.
